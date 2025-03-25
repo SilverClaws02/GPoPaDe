@@ -20,7 +20,7 @@ switch ($methods)
         break;
     case 'POST':
         $data=json_decode(file_get_contents("php://input"), true);
-        $query="INSERT INTO products (name, price, description) VALUES (?, ?, ?)";
+        $query="INSERT INTO products (`name`, `price`, `description`) VALUES (?, ?, ?)";
         $db->executeSelectQuery($query, [$data['name'], $data['price'], $data['description']]);
         echo json_encode(["message" => "Product Created"]);
         break;
@@ -40,3 +40,5 @@ switch ($methods)
         echo json_encode(["message" => "Method not supported"]);
         break;
 }
+
+$db->closeDB();
